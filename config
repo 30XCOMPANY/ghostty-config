@@ -1,0 +1,148 @@
+# ============================================
+#  Ghostty — Designed to Disappear
+# ============================================
+# Philosophy: the best terminal is one you forget exists.
+# File: ~/.config/ghostty/config
+
+# ━━━ Typography ━━━
+# Maple Mono: ligatures + CJK + Nerd Font, one font to rule them all
+font-family = "Maple Mono NF CN"
+font-size = 14
+font-thicken = true
+font-feature = +calt
+font-feature = +liga
+adjust-cell-height = 3
+adjust-cell-width = 1
+
+# ━━━ Theme ━━━
+# Auto-switch: eyes don't fight the OS
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+# ━━━ Window: Disappear ━━━
+background-opacity = 0.88
+background-opacity-cells = true
+background-blur = macos-glass-regular
+macos-titlebar-style = transparent
+window-padding-x = 12
+window-padding-y = 10
+window-padding-balance = true
+window-padding-color = extend
+window-save-state = always
+window-inherit-working-directory = true
+window-colorspace = display-p3
+window-theme = auto
+
+# ━━━ Cursor: Visible but Quiet ━━━
+cursor-style = bar
+cursor-style-blink = false
+cursor-opacity = 1.0
+
+# ━━━ Mouse: Stay Out of the Way ━━━
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+focus-follows-mouse = true
+
+# ━━━ Quick Terminal (⌃`) ━━━
+quick-terminal-position = top
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.12
+
+# ━━━ Splits ━━━
+unfocused-split-fill = #313244
+unfocused-split-opacity = 0.85
+split-preserve-zoom = navigation
+
+# ━━━ Shell ━━━
+shell-integration = detect
+shell-integration-features = no-cursor,sudo,ssh-env,ssh-terminfo
+scrollback-limit = 10000000
+resize-overlay = after-first
+resize-overlay-position = bottom-right
+resize-overlay-duration = 500ms
+
+# ━━━ Claude Code Optimizations ━━━
+# Larger initial window: Claude Code needs vertical space for diffs
+window-width = 160
+window-height = 50
+
+# Link detection: cmd+click to open URLs/file paths from Claude output
+link-url = true
+
+# ━━━ Notifications ━━━
+# Long commands notify when done (only if terminal is unfocused, only if >10s)
+notify-on-command-finish = unfocused
+notify-on-command-finish-after = 10s
+
+# ━━━ Accessibility ━━━
+minimum-contrast = 1.1
+
+# ━━━ Shaders ━━━
+# Bloom: subtle glow on bright text, not distracting
+# custom-shader = ~/.config/ghostty/shaders/community/bloom.glsl
+# ━━━ Shaders ━━━
+# Bloom: subtle glow on bright text
+# custom-shader = ~/.config/ghostty/shaders/community/bloom.glsl
+# Cursor trail: kitty-style comet tail (for vim/large cursor jumps)
+# custom-shader = ~/.config/ghostty/shaders/cursor/cursor_tail.glsl
+# custom-shader-animation = always
+
+# ━━━ Security ━━━
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Keybindings: Leader Key Architecture
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Design: all navigation on home row.
+
+# --- Tabs: Cmd+1-9 direct jump ---
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_surface
+keybind = cmd+1=goto_tab:1
+keybind = cmd+2=goto_tab:2
+keybind = cmd+3=goto_tab:3
+keybind = cmd+4=goto_tab:4
+keybind = cmd+5=goto_tab:5
+keybind = cmd+6=goto_tab:6
+keybind = cmd+7=goto_tab:7
+keybind = cmd+8=goto_tab:8
+keybind = cmd+9=goto_tab:9
+keybind = cmd+shift+left=previous_tab
+keybind = cmd+shift+right=next_tab
+
+# --- Splits: Cmd+D / Cmd+Shift+D ---
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# --- Split Navigation: Cmd+Alt+hjkl (home row!) ---
+keybind = cmd+alt+h=goto_split:left
+keybind = cmd+alt+l=goto_split:right
+keybind = cmd+alt+k=goto_split:top
+keybind = cmd+alt+j=goto_split:bottom
+
+# --- Split Resize: Cmd+Ctrl+hjkl ---
+keybind = cmd+ctrl+h=resize_split:left,40
+keybind = cmd+ctrl+l=resize_split:right,40
+keybind = cmd+ctrl+k=resize_split:up,40
+keybind = cmd+ctrl+j=resize_split:down,40
+
+# --- Split Management ---
+keybind = cmd+shift+e=equalize_splits
+keybind = cmd+shift+f=toggle_split_zoom
+keybind = cmd+shift+enter=toggle_fullscreen
+
+# --- Font Size ---
+keybind = cmd+plus=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+zero=reset_font_size
+
+# --- Quick Terminal ---
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# --- Utilities ---
+keybind = cmd+k=clear_screen
+keybind = cmd+shift+comma=reload_config
+keybind = cmd+ctrl+t=toggle_window_float_on_top
+keybind = cmd+shift+s=write_scrollback_file:open
